@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958916148427",
+    "project_id": "cpmad-lab-4-1dbb4",
+    "storage_bucket": "cpmad-lab-4-1dbb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958916148427:android:0966d48b6aa47b97df2f4e",
+        "android_client_info": {
+          "package_name": "com.cpmad_lab_4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtyQjspnDQhZpu3H1YQz4NPwFlbQn4efQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
