@@ -4,16 +4,17 @@ import { MyContextControllerProvider } from "./context"
 import firestore from "@react-native-firebase/firestore"
 import auth from "@react-native-firebase/auth"
 import Router from "./routers/Router"
+import { PaperProvider } from "react-native-paper"
 
 
 
 export default function App() {
   const USERS = firestore().collection("USERS")
   const admin = {
-    name: "admin",
+    name: "Admin",
     phone: "0123456789",
-    address: "Binfh Duong",
-    email: "hoainam@gmail.com",
+    address: "Binh Duong",
+    email: "hoainam3183@gmail.com",
     password: "123456",
     role: "admin"
   }
@@ -33,7 +34,9 @@ export default function App() {
   return (
     <MyContextControllerProvider>
       <NavigationContainer>
-        <Router />
+        <PaperProvider>
+         <Router />
+        </PaperProvider>
       </NavigationContainer>
     </MyContextControllerProvider>
   )

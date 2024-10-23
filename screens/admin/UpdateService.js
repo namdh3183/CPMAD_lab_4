@@ -1,27 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import firestore from "@react-native-firebase/firestore"
 
-export default function AddNewService({navigation}) {
-    const [name, setName] = useState("")
-    const [price, setPrice] = useState("")
-
+export default function UpdateService({navigation, route}) {
+    const { service } = route.params;
+    const [name, setName] = useState(service.name)
+    const [price, setPrice] = useState(service.price)
     const cSERVICES = firestore().collection("SERVICES")
-    const addNewService = () => {
-        const newServiceRef = cSERVICES.doc();
-        const newService = {
-            id: newServiceRef.id,
+
+    const handleUpdate = () => {
+        cSERVICES.doc(service.id).update({
             name,
             price
-        };
-        newServiceRef.set(newService);
-        
-        setName("")
-        setPrice("")
-        alert("Service added successfully!")
+        })
+        alert("Service updated successfully!")
         navigation.navigate("Services")
-    }
+    };
 
     return (
         <View>
@@ -43,9 +38,9 @@ export default function AddNewService({navigation}) {
 
             <Button
                 mode="contained"
-                onPress={addNewService}
+                onPress={handleUpdate}
                 style={{width: 100, alignSelf: "center"}}
-                >Add</Button>
+                >Update</Button>
         </View>
     )
 }

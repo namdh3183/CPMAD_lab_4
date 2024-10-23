@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { Button, HelperText, Text, TextInput } from "react-native-paper"
 import { login, useMyContextController } from "../context"
-
+import auth from "@react-native-firebase/auth"
 
 const Login = ({navigation}) => {
     const [email, setEmail] = useState("")
@@ -17,16 +17,29 @@ const Login = ({navigation}) => {
     const checkPassword = ()=>{
         // let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         // return regex.test(password) || password === ""
-        return password == ""
+        return password != ""
     }
 
     const handleLogin = () => {
+        setEmail("")
+        setPassword("")
         login(dispatch, email, password)
     }
 
     const handleForgot = () => {
-        // navigation.navigate("ForgotPass")
-    }
+      if (!email) {
+          alert("Please enter your email to reset the password.");
+          return;
+      }
+      auth().sendPasswordResetEmail(email)
+          .then(() => {
+              alert("Password reset email sent!");
+          })
+          .catch(error => {
+              console.error("Error sending password reset email: ", error);
+              alert("There was an error sending the password reset email.");
+          });
+  };
 
     const handleCreate = () => {
         navigation.navigate("Register")
@@ -45,7 +58,6 @@ const Login = ({navigation}) => {
     
     return ( 
         <View style={styles.container}>
-            {/* <Image source={require("./images/moon.png")} style={ styles.image }/> */}
             <View style={ styles.form }>
             <Text style={styles.header}>Sign in with your account</Text>
             <Text style={styles.text}>Email address</Text>
@@ -73,9 +85,7 @@ const Login = ({navigation}) => {
                     onPress={() => setShowPass(!showPass)} />
                 }
                 value={password}/>
-            <HelperText type="error" visible={!checkPassword()} style={styles.helpertext}>
-                Please re-enter password !
-            </HelperText>
+            
             <Button mode="text" style={styles.forgotBtn} onPress={handleForgot}>Forgot your password ?</Button>
             <Button 
                 mode="contained-tonal" 

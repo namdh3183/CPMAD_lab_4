@@ -2,7 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import RouterService from "./RouterService";
 import Transaction from "./Transaction";
 import Customers from "./Customers";
-import Setting from "./Setting";
+import RouterProfile from "../RouterProfile";
 
 const Tab = createMaterialBottomTabNavigator()
 export default function Admin() {
@@ -32,7 +32,7 @@ export default function Admin() {
 
             <Tab.Screen 
                 name="Setting" 
-                component={Setting} 
+                component={RouterProfile} 
                 options={{
                     tabBarIcon: "cog"
                 }}/>

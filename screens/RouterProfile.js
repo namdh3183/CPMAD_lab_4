@@ -1,47 +1,37 @@
 import { View } from "react-native";
 import { IconButton, Text } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useMyContextController } from "../../context";
-import Services from "./Services";
-import AddNewService from "./AddNewService";
-import ServiceDetail from "./ServiceDetail";
-import UpdateService from "./UpdateService";
+import { useMyContextController } from "../context";
+import Setting from "./Setting";
+import UpdateProfile from "./UpdateProfile";
+import ChangePass from "./ChangePass";
 
 const Stack = createStackNavigator()
-export default function RouterService({navigation}) {
+export default function RouterProfile({navigation}) {
     const [controller, dispatch] = useMyContextController()
     const { userLogin } = controller
 
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Services" component={Services} 
+            <Stack.Screen name="Settings" component={Setting} 
                 options={{
                     title: (userLogin!=null) && (userLogin.name),
                     headerTitleAlign: "center",
                     headerStyle: {
                         backgroundColor: "#8893d1"
                     },
-                    headerRight: (props) => <IconButton icon={"account"} onPress={() => navigation.navigate("Setting")}/>
                 }}/>
-            <Stack.Screen name="AddNewService" component={AddNewService}
+            <Stack.Screen name="UpdateProfile" component={UpdateProfile}
                 options={{
-                    title: "Add new Service",
+                    title: "Update Profile",
                     headerTitleAlign: "center",
                     headerStyle: {
                         backgroundColor: "#8893d1"
                     }
                 }}/>
-            <Stack.Screen name="ServiceDetail" component={ServiceDetail}
+            <Stack.Screen name="ChangePass" component={ChangePass}
                 options={{
-                    title: "Detail",
-                    headerTitleAlign: "center",
-                    headerStyle: {
-                        backgroundColor: "#8893d1"
-                    }
-                }}/>
-            <Stack.Screen name="UpdateService" component={UpdateService}
-                options={{
-                    title: "Update",
+                    title: "Change Password",
                     headerTitleAlign: "center",
                     headerStyle: {
                         backgroundColor: "#8893d1"

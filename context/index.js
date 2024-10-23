@@ -45,7 +45,6 @@ const useMyContextController = () => {
 }
 
 const cUSERS = firestore().collection("USERS")
-const cSERVICES = firestore().collection("SERVICES")
 
 // Action
 const login = (dispatch, email, password) => {
@@ -64,19 +63,9 @@ const logout = (dispatch) => {
     .then(() => dispatch({type: "USER_LOGIN", }))
 }
 
-const createNewService = (newService) => {
-    newService.finalUpdate = firestore.FieldValue.serverTimestamp()
-    cSERVICES.add(newService)
-    .then(() => {
-        alert("Added new service !")
-    })
-    .catch((e) => alert(e))
-}
-
 export { 
     MyContextControllerProvider,
     useMyContextController,
     login,
     logout,
-    createNewService
 }
